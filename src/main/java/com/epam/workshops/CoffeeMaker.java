@@ -1,5 +1,6 @@
 package com.epam.workshops;
 
+import java.util.Locale;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,12 +27,14 @@ public class CoffeeMaker {
     }
 
     public boolean command(String input) throws InterruptedException {
-        Matcher matcher = pattern.matcher(input);
+        Matcher matcher = pattern.matcher(input.toLowerCase());
 
         if (input.equalsIgnoreCase("hello"))
             System.out.println("Hello!");
-        else if (input.equalsIgnoreCase("exit"))
+        else if (input.equalsIgnoreCase("exit")) {
             System.out.println("Bye!");
+            return false;
+        }
         else if (input.equalsIgnoreCase("status"))
             System.out.println(getStatus());
         else if (input.equalsIgnoreCase("make coffee")) {
@@ -40,39 +43,21 @@ public class CoffeeMaker {
             else
                 System.out.println("Not enough ingredients");
         } else if (matcher.find()) {
-            RecipeReader.readRecipe(matcher.group(1));
+            if (input.split(" ")[1].length() > 1) {
+                RecipeReader.readRecipe(input.split(" ")[1]);
+            }
         } else {
             System.out.println("Unknown command");
-            return false;
         }
         return true;
     }
 
     public String makeCoffee() throws InterruptedException {
-        grindCoffee();
-        heatWater();
-        pourWater(20);
-        pourWater(10);
+        Actions.grind("coffee", 10);
+        Actions.heat("water", 15);
+        Actions.pour("water",20);
+        Actions.pour("water",10);
         return "Done!";
-    }
-
-    private void pourWater(int secs) throws InterruptedException {
-        System.out.println("Pour water...");
-        sleep(secs);
-    }
-
-    private void heatWater() throws InterruptedException {
-        System.out.println("Heat water...");
-        sleep(15);
-    }
-
-    private void grindCoffee() throws InterruptedException {
-        System.out.println("Grind coffee...");
-        sleep(10);
-    }
-
-    private void sleep(int secs) throws InterruptedException {
-        Thread.sleep(secs * 1000L);
     }
 
     private boolean isEnoughIngredients() {
@@ -85,10 +70,10 @@ public class CoffeeMaker {
     }
 
     public String getStatus() {
-        String coffeeStatus = String.format(TABLE_FORMAT, "Coffee:", ((coffee * 100) / 2000) + "%", coffee + "g");
-        String waterStatus = String.format(TABLE_FORMAT, "Water:", ((water * 100) / 1500) + "%", water + "g");
-        String milkStatus = String.format(TABLE_FORMAT, "Milk:", ((milk * 100) / 1000) + "%", milk + "g");
-        String cocoaStatus = String.format(TABLE_FORMAT, "Cocoa:", ((cocoa * 100) / 2000) + "%", cocoa + "g");
+        String coffeeStatus = String.format(TABLE_FORMAT, "Coffee:", ((coffee * 100) / MAX_COFFEE) + "%", coffee + "g");
+        String waterStatus = String.format(TABLE_FORMAT, "Water:", ((water * 100) / MAX_WATER) + "%", water + "g");
+        String milkStatus = String.format(TABLE_FORMAT, "Milk:", ((milk * 100) / MAX_MILK) + "%", milk + "g");
+        String cocoaStatus = String.format(TABLE_FORMAT, "Cocoa:", ((cocoa * 100) / MAX_COCOA) + "%", cocoa + "g");
 
         return coffeeStatus + waterStatus + milkStatus + cocoaStatus;
     }

@@ -5,13 +5,13 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class RecipeReader {
-    private final static String fileformat = ".rcp";
+    private final static String fileFormat = ".rcp";
 
     public static void readRecipe (String filename) {
-        try (BufferedReader br = new BufferedReader(new FileReader(filename + fileformat))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filename + fileFormat))) {
             String line;
             while ((line = br.readLine()) != null) {
-                System.out.println(line);
+                String[] data = line.split(":");
             }
 
         } catch (IOException e) {
