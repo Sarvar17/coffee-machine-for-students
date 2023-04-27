@@ -14,12 +14,7 @@ class AppStarter {
         while (true) {
             System.out.print("CoffeeMaker> ");
             input = scanner.nextLine();
-            if (input.toLowerCase().equals("hello"))
-                System.out.println("Hello!");
-            else if (input.toLowerCase().equals("exit"))
-                System.out.println("Bye!");
-            else
-                System.out.println("Unknown command");
+            CoffeeMaker.command(input);
         }
     }
 }
