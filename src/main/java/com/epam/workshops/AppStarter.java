@@ -8,7 +8,7 @@ import java.util.Scanner;
  * @author Marcin Ogorzalek
  */
 class AppStarter {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         CoffeeMaker coffeeMaker = new CoffeeMaker();
         String input = "";
         Scanner scanner = new Scanner(System.in);
