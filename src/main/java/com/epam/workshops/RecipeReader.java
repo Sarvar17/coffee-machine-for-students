@@ -12,10 +12,14 @@ public class RecipeReader {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(":");
+                switch (data[0]) {
+                    case "GRIND" -> Actions.grind(data[1].toLowerCase(), Integer.parseInt(data[3]));
+                    case "HEAT" -> Actions.heat(data[1].toLowerCase(), Integer.parseInt(data[3]));
+                    case "POUR" -> Actions.pour(data[1].toLowerCase(), Integer.parseInt(data[3]));
+                }
             }
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException | InterruptedException ignored) {
         }
     }
 }
