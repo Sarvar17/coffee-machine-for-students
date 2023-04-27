@@ -8,13 +8,13 @@ public class CoffeeMaker {
     private final int MAX_WATER = 1500;
     private final int MAX_MILK = 1000;
     private final int MAX_COCOA = 2000;
-    private final Random random = new Random();
     private int coffee;
     private int water;
     private int milk;
     private int cocoa;
 
     public CoffeeMaker() {
+        Random random = new Random();
         this.coffee = random.nextInt(MAX_COFFEE);
         this.water = random.nextInt(MAX_WATER);
         this.milk = random.nextInt(MAX_MILK);
@@ -50,7 +50,7 @@ public class CoffeeMaker {
 
     private void pourWater(int secs) throws InterruptedException {
         System.out.println("Pour water...");
-        sleep(10);
+        sleep(secs);
     }
 
     private void heatWater() throws InterruptedException {
@@ -64,12 +64,15 @@ public class CoffeeMaker {
     }
 
     private void sleep(int secs) throws InterruptedException {
-        Thread.sleep(secs * 1000);
+        Thread.sleep(secs * 1000L);
     }
 
     private boolean isEnoughIngredients() {
-        if (coffee >= 11 && water >= 200)
+        if (coffee >= 11 && water >= 200) {
+            coffee -= 11;
+            water -= 200;
             return true;
+        }
         return false;
     }
 
