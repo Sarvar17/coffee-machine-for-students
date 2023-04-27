@@ -1,9 +1,13 @@
 package com.epam.workshops;
 
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CoffeeMaker {
     private final String TABLE_FORMAT = "%-8s%-5s%-10s\n";
+    private final Pattern pattern = Pattern.compile("^make\\s+\\w+");
+
     private final int MAX_COFFEE = 2000;
     private final int MAX_WATER = 1500;
     private final int MAX_MILK = 1000;
@@ -22,18 +26,22 @@ public class CoffeeMaker {
     }
 
     public boolean command(String input) throws InterruptedException {
+        Matcher matcher = pattern.matcher(input);
+
         if (input.equalsIgnoreCase("hello"))
             System.out.println("Hello!");
         else if (input.equalsIgnoreCase("exit"))
             System.out.println("Bye!");
         else if (input.equalsIgnoreCase("status"))
             System.out.println(getStatus());
-        else if (input.equalsIgnoreCase("make coffee"))
+        else if (input.equalsIgnoreCase("make coffee")) {
             if (isEnoughIngredients())
                 System.out.println(makeCoffee());
             else
                 System.out.println("Not enough ingredients");
-        else {
+        } else if (matcher.find()) {
+            RecipeReader.readRecipe(matcher.group(1));
+        } else {
             System.out.println("Unknown command");
             return false;
         }
