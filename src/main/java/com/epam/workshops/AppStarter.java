@@ -9,12 +9,14 @@ import java.util.Scanner;
  */
 class AppStarter {
     public static void main(String[] args) {
+        CoffeeMaker coffeeMaker = new CoffeeMaker();
         String input = "";
         Scanner scanner = new Scanner(System.in);
+
         while (true) {
             System.out.print("CoffeeMaker> ");
             input = scanner.nextLine();
-            CoffeeMaker.command(input);
+            coffeeMaker.command(input);
         }
     }
 }
