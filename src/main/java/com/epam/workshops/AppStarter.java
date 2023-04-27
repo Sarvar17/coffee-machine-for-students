@@ -16,7 +16,8 @@ class AppStarter {
         while (true) {
             System.out.print("CoffeeMaker> ");
             input = scanner.nextLine();
-            coffeeMaker.command(input);
+            if (!coffeeMaker.command(input))
+                break;
         }
     }
 }

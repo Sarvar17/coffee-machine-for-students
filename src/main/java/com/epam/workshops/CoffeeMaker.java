@@ -17,15 +17,18 @@ public class CoffeeMaker {
         this.cocoa = random.nextInt(2000);
     }
 
-    public void command(String input) {
+    public boolean command(String input) {
         if (input.equalsIgnoreCase("hello"))
             System.out.println("Hello!");
         else if (input.equalsIgnoreCase("exit"))
             System.out.println("Bye!");
         else if (input.equalsIgnoreCase("status"))
             System.out.println(getStatus());
-        else
+        else {
             System.out.println("Unknown command");
+            return false;
+        }
+        return true;
     }
 
     public String getStatus() {
