@@ -1,5 +1,7 @@
 package com.epam.workshops;
 
+import java.util.Scanner;
+
 /**
  * Contains main, starts the app
  *
@@ -7,6 +9,17 @@ package com.epam.workshops;
  */
 class AppStarter {
     public static void main(String[] args) {
-        System.out.println("Welcome to Coffee Maker!"); // An example print, it may be replaced
+        String input = "";
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.print("CoffeeMaker> ");
+            input = scanner.nextLine();
+            if (input.toLowerCase().equals("hello"))
+                System.out.println("Hello!");
+            else if (input.toLowerCase().equals("exit"))
+                System.out.println("Bye!");
+            else
+                System.out.println("Unknown command");
+        }
     }
 }
