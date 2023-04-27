@@ -17,18 +17,56 @@ public class CoffeeMaker {
         this.cocoa = random.nextInt(2000);
     }
 
-    public boolean command(String input) {
+    public boolean command(String input) throws InterruptedException {
         if (input.equalsIgnoreCase("hello"))
             System.out.println("Hello!");
         else if (input.equalsIgnoreCase("exit"))
             System.out.println("Bye!");
         else if (input.equalsIgnoreCase("status"))
             System.out.println(getStatus());
+        else if (input.equalsIgnoreCase("make coffee"))
+            if (isEnoughIngredients())
+                System.out.println(makeCoffee());
+            else
+                System.out.println("Not enough ingredients");
         else {
             System.out.println("Unknown command");
             return false;
         }
         return true;
+    }
+
+    public String makeCoffee() throws InterruptedException {
+        grindCoffee();
+        heatWater();
+        pourWater(20);
+        pourWater(10);
+        return "Done!";
+    }
+
+    private void pourWater(int secs) throws InterruptedException {
+        System.out.println("Pour water...");
+        sleep(10);
+    }
+
+    private void heatWater() throws InterruptedException {
+        System.out.println("Heat water...");
+        sleep(15);
+    }
+
+    private void grindCoffee() throws InterruptedException {
+        System.out.println("Grind coffee...");
+        sleep(10);
+    }
+
+    private void sleep(int secs) throws InterruptedException {
+        Thread.sleep(secs * 1000);
+    }
+
+    private boolean isEnoughIngredients() {
+        if (coffee >= 11 && water >= 200)
+            return true;
+        return false;
     }
 
     public String getStatus() {
