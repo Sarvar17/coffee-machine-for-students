@@ -3,7 +3,11 @@ package com.epam.workshops;
 import java.util.Random;
 
 public class CoffeeMaker {
-    private final String tableFormat = "%-8s%-5s%-10s\n";
+    private final String TABLE_FORMAT = "%-8s%-5s%-10s\n";
+    private final int MAX_COFFEE = 2000;
+    private final int MAX_WATER = 1500;
+    private final int MAX_MILK = 1000;
+    private final int MAX_COCOA = 2000;
     private final Random random = new Random();
     private int coffee;
     private int water;
@@ -11,10 +15,10 @@ public class CoffeeMaker {
     private int cocoa;
 
     public CoffeeMaker() {
-        this.coffee = random.nextInt(2000);
-        this.water = random.nextInt(1500);
-        this.milk = random.nextInt(1000);
-        this.cocoa = random.nextInt(2000);
+        this.coffee = random.nextInt(MAX_COFFEE);
+        this.water = random.nextInt(MAX_WATER);
+        this.milk = random.nextInt(MAX_MILK);
+        this.cocoa = random.nextInt(MAX_COCOA);
     }
 
     public boolean command(String input) throws InterruptedException {
@@ -70,10 +74,10 @@ public class CoffeeMaker {
     }
 
     public String getStatus() {
-        String coffeeStatus = String.format(tableFormat, "Coffee:", ((coffee * 100) / 2000) + "%", coffee + "g");
-        String waterStatus = String.format(tableFormat, "Water:", ((water * 100) / 1500) + "%", water + "g");
-        String milkStatus = String.format(tableFormat, "Milk:", ((milk * 100) / 1000) + "%", milk + "g");
-        String cocoaStatus = String.format(tableFormat, "Cocoa:", ((cocoa * 100) / 2000) + "%", cocoa + "g");
+        String coffeeStatus = String.format(TABLE_FORMAT, "Coffee:", ((coffee * 100) / 2000) + "%", coffee + "g");
+        String waterStatus = String.format(TABLE_FORMAT, "Water:", ((water * 100) / 1500) + "%", water + "g");
+        String milkStatus = String.format(TABLE_FORMAT, "Milk:", ((milk * 100) / 1000) + "%", milk + "g");
+        String cocoaStatus = String.format(TABLE_FORMAT, "Cocoa:", ((cocoa * 100) / 2000) + "%", cocoa + "g");
 
         return coffeeStatus + waterStatus + milkStatus + cocoaStatus;
     }
